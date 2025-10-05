@@ -152,7 +152,7 @@ header {
 .hamburger {
   display: none;
   position: fixed;
-  top: 1rem;
+  top: 0.3rem;
   left: 1rem;
   background: var(--primary);
   color: white;
@@ -169,6 +169,7 @@ header {
 /* Efecto visual al abrir */
 .hamburger.active {
   background: #2e9964;
+  left: 16rem;
   transform: rotate(90deg);
 }
 
