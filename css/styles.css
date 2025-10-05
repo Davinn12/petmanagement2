@@ -46,8 +46,8 @@ input, select, textarea {
   border: 1px solid #ddd;
   border-radius: var(--radius);
   font-size: 1rem;
-  box-sizing: border-box; /* Importante para el responsive */
-  max-width: 100%; /* Previene que se salgan del contenedor */
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 label { 
@@ -62,7 +62,7 @@ label {
   padding: 1.5rem;
   box-shadow: var(--shadow);
   margin-bottom: 1.5rem;
-  overflow: hidden; /* Previene que el contenido se salga */
+  overflow: hidden;
 }
 
 .grid { 
@@ -122,7 +122,7 @@ main {
   flex: 1; 
   padding: 2rem 3rem;
   transition: all 0.3s ease;
-  overflow-x: hidden; /* Previene scroll horizontal no deseado */
+  overflow-x: hidden;
 }
 
 header {
@@ -130,7 +130,7 @@ header {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
-  flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
@@ -155,36 +155,60 @@ header {
   margin-bottom: 1rem;
 }
 
-/* ======== TABLE RESPONSIVE ======== */
+/* ======== TABLE RESPONSIVE CON SCROLL ======== */
 .table-container {
   overflow-x: auto;
   margin-top: 1rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   background: white;
+  -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px; /* Ancho mínimo para tablas complejas */
+  min-width: 600px; /* Ancho mínimo para forzar scroll en pantallas pequeñas */
 }
 
 .table th, .table td {
   padding: 0.75rem;
   border-bottom: 1px solid #ddd;
   text-align: left;
-  white-space: nowrap; /* Evita que el texto se divida en tablas pequeñas */
+  white-space: nowrap;
 }
 
 .table th {
   background: var(--secondary);
   font-weight: 600;
+  position: sticky;
+  top: 0;
 }
 
-/* Para tablas en móviles - diseño alternativo */
-.table-mobile {
-  display: none;
+/* Scrollbar personalizado para la tabla */
+.table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+  margin: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: #2e9964;
+}
+
+/* Para Firefox */
+.table-container {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) #f1f1f1;
 }
 
 /* ======== HAMBURGER MENU ======== */
@@ -251,6 +275,10 @@ header {
     padding: 0.6rem;
     font-size: 0.95rem;
   }
+  
+  .table {
+    min-width: 700px; /* Un poco más ancho para tablets */
+  }
 }
 
 /* Mobile */
@@ -315,50 +343,28 @@ header {
   
   /* INPUTS EN MÓVIL */
   input, select, textarea {
-    font-size: 16px; /* Previene zoom en iOS */
+    font-size: 16px;
     padding: 0.8rem;
   }
   
-  /* TABLAS EN MÓVIL */
+  /* TABLAS EN MÓVIL CON SCROLL MEJORADO */
+  .table-container {
+    border: 1px solid #e0e0e0;
+    margin: 1rem 0;
+  }
+  
   .table {
-    min-width: 800px; /* Para tablas más anchas en móvil */
+    min-width: 800px; /* Forzar scroll horizontal en móviles */
   }
   
   .table th, .table td {
-    padding: 0.5rem 0.4rem;
+    padding: 0.6rem 0.5rem;
     font-size: 0.9rem;
   }
   
-  /* Alternativa para tablas en móviles - convertir en tarjetas */
-  .table-responsive {
-    display: block;
-    width: 100%;
-  }
-  
-  .table-responsive thead {
-    display: none;
-  }
-  
-  .table-responsive tr {
-    display: block;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: var(--radius);
-    padding: 0.5rem;
-  }
-  
-  .table-responsive td {
-    display: block;
-    text-align: right;
-    border: none;
-    padding: 0.5rem;
-  }
-  
-  .table-responsive td::before {
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-    text-transform: uppercase;
+  /* Scrollbar más visible en móviles */
+  .table-container::-webkit-scrollbar {
+    height: 10px;
   }
 }
 
@@ -380,14 +386,18 @@ header {
   
   .table th, 
   .table td {
-    padding: 0.4rem 0.3rem;
+    padding: 0.5rem 0.4rem;
     font-size: 0.85rem;
+  }
+  
+  .table {
+    min-width: 850px; /* Aún más ancho para móviles pequeños */
   }
   
   .btn {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
-    width: 100%; /* Botones a ancho completo en móviles muy pequeños */
+    width: 100%;
     text-align: center;
   }
   
@@ -401,6 +411,11 @@ header {
   
   .card {
     padding: 0.8rem;
+  }
+  
+  /* Scrollbar más prominente en móviles pequeños */
+  .table-container::-webkit-scrollbar {
+    height: 12px;
   }
 }
 
@@ -417,6 +432,11 @@ header {
   .grid-3 {
     grid-template-columns: repeat(4, 1fr);
   }
+  
+  .table {
+    min-width: auto; /* En pantallas grandes, no forzar scroll */
+    width: 100%;
+  }
 }
 
 /* Prevención de desbordamiento global */
@@ -430,17 +450,24 @@ header {
   margin-bottom: 1rem;
 }
 
-/* Scroll suave para tablas en móviles */
-.table-container::-webkit-scrollbar {
-  height: 8px;
+/* Indicador visual de que hay más contenido (opcional) */
+.table-container {
+  position: relative;
 }
 
-.table-container::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
+.table-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 20px;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
-.table-container::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 4px;
+.table-container.scrollable::after {
+  opacity: 1;
 }
