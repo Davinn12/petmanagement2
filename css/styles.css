@@ -123,6 +123,7 @@ main {
   padding: 2rem 3rem;
   transition: all 0.3s ease;
   overflow-x: hidden;
+  width: 100%;
 }
 
 header {
@@ -155,58 +156,71 @@ header {
   margin-bottom: 1rem;
 }
 
-/* ======== TABLE RESPONSIVE CON SCROLL ======== */
-.table-container {
+/* ======== TABLAS CON SCROLL HORIZONTAL GARANTIZADO ======== */
+.table-wrapper {
+  width: 100%;
   overflow-x: auto;
-  margin-top: 1rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   background: white;
-  -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+  -webkit-overflow-scrolling: touch;
+  margin: 1rem 0;
 }
 
 .table {
-  width: 100%;
+  width: auto;
+  min-width: 100%;
   border-collapse: collapse;
-  min-width: 600px; /* Ancho mínimo para forzar scroll en pantallas pequeñas */
+  margin: 0;
 }
 
 .table th, .table td {
-  padding: 0.75rem;
-  border-bottom: 1px solid #ddd;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e0e0e0;
   text-align: left;
   white-space: nowrap;
+  min-width: 120px;
 }
 
 .table th {
   background: var(--secondary);
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--text);
+  border-bottom: 2px solid var(--primary);
   position: sticky;
   top: 0;
 }
 
-/* Scrollbar personalizado para la tabla */
-.table-container::-webkit-scrollbar {
-  height: 8px;
+.table tr:last-child td {
+  border-bottom: none;
 }
 
-.table-container::-webkit-scrollbar-track {
+.table tr:hover td {
+  background: #f8f8f8;
+}
+
+/* Scrollbar personalizado */
+.table-wrapper::-webkit-scrollbar {
+  height: 12px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
   background: #f1f1f1;
-  border-radius: 4px;
-  margin: 4px;
+  border-radius: 0 0 4px 4px;
 }
 
-.table-container::-webkit-scrollbar-thumb {
+.table-wrapper::-webkit-scrollbar-thumb {
   background: var(--primary);
   border-radius: 4px;
+  border: 2px solid #f1f1f1;
 }
 
-.table-container::-webkit-scrollbar-thumb:hover {
+.table-wrapper::-webkit-scrollbar-thumb:hover {
   background: #2e9964;
 }
 
-/* Para Firefox */
-.table-container {
+/* Firefox */
+.table-wrapper {
   scrollbar-width: thin;
   scrollbar-color: var(--primary) #f1f1f1;
 }
@@ -272,12 +286,8 @@ header {
   }
   
   .table th, .table td {
-    padding: 0.6rem;
-    font-size: 0.95rem;
-  }
-  
-  .table {
-    min-width: 700px; /* Un poco más ancho para tablets */
+    padding: 0.6rem 0.8rem;
+    min-width: 100px;
   }
 }
 
@@ -341,29 +351,23 @@ header {
     left: 18rem;
   }
   
-  /* INPUTS EN MÓVIL */
-  input, select, textarea {
-    font-size: 16px;
-    padding: 0.8rem;
-  }
-  
-  /* TABLAS EN MÓVIL CON SCROLL MEJORADO */
-  .table-container {
+  /* TABLAS EN MÓVIL */
+  .table-wrapper {
+    margin: 0.5rem 0;
     border: 1px solid #e0e0e0;
-    margin: 1rem 0;
   }
   
   .table {
-    min-width: 800px; /* Forzar scroll horizontal en móviles */
+    min-width: 800px; /* Forzar scroll horizontal */
   }
   
   .table th, .table td {
-    padding: 0.6rem 0.5rem;
+    padding: 0.5rem 0.6rem;
     font-size: 0.9rem;
+    min-width: 80px;
   }
   
-  /* Scrollbar más visible en móviles */
-  .table-container::-webkit-scrollbar {
+  .table-wrapper::-webkit-scrollbar {
     height: 10px;
   }
 }
@@ -384,14 +388,14 @@ header {
     margin-top: 2vh;
   }
   
-  .table th, 
-  .table td {
-    padding: 0.5rem 0.4rem;
+  .table th, .table td {
+    padding: 0.4rem 0.5rem;
     font-size: 0.85rem;
+    min-width: 70px;
   }
   
   .table {
-    min-width: 850px; /* Aún más ancho para móviles pequeños */
+    min-width: 900px; /* Más ancho para forzar scroll */
   }
   
   .btn {
@@ -405,17 +409,8 @@ header {
     left: 16rem;
   }
   
-  input, select, textarea {
-    padding: 0.7rem;
-  }
-  
-  .card {
-    padding: 0.8rem;
-  }
-  
-  /* Scrollbar más prominente en móviles pequeños */
-  .table-container::-webkit-scrollbar {
-    height: 12px;
+  .table-wrapper::-webkit-scrollbar {
+    height: 8px;
   }
 }
 
@@ -432,11 +427,6 @@ header {
   .grid-3 {
     grid-template-columns: repeat(4, 1fr);
   }
-  
-  .table {
-    min-width: auto; /* En pantallas grandes, no forzar scroll */
-    width: 100%;
-  }
 }
 
 /* Prevención de desbordamiento global */
@@ -444,30 +434,26 @@ header {
   box-sizing: border-box;
 }
 
-/* Asegurar que los contenedores de inputs no se desborden */
-.form-group {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-/* Indicador visual de que hay más contenido (opcional) */
-.table-container {
+/* Indicador visual de scroll (opcional) */
+.table-wrapper {
   position: relative;
 }
 
-.table-container::after {
-  content: "";
+.table-wrapper::before {
+  content: "← Desplaza →";
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 20px;
-  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
+  top: -25px;
+  right: 10px;
+  font-size: 0.75rem;
+  color: var(--primary);
+  background: var(--secondary);
+  padding: 2px 8px;
+  border-radius: 10px;
+  display: none;
 }
 
-.table-container.scrollable::after {
-  opacity: 1;
+@media (max-width: 768px) {
+  .table-wrapper::before {
+    display: block;
+  }
 }
