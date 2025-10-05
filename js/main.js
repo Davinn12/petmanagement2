@@ -4,10 +4,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // === TOGGLE MENU MOBILE ===
   const hamburger = document.querySelector(".hamburger");
   const sidebar = document.querySelector(".sidebar");
+  const overlay = document.createElement("div");
+  overlay.classList.add("sidebar-overlay");
+  document.body.appendChild(overlay);
 
   if (hamburger && sidebar) {
     hamburger.addEventListener("click", () => {
       sidebar.classList.toggle("open");
+      overlay.classList.toggle("active");
+    });
+
+    overlay.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("active");
     });
   }
   
