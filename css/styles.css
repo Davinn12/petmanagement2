@@ -38,6 +38,7 @@ a {
   background: #2e9964; 
 }
 
+/* INPUTS RESPONSIVE */
 input, select, textarea {
   width: 100%;
   padding: 0.7rem;
@@ -45,6 +46,8 @@ input, select, textarea {
   border: 1px solid #ddd;
   border-radius: var(--radius);
   font-size: 1rem;
+  box-sizing: border-box; /* Importante para el responsive */
+  max-width: 100%; /* Previene que se salgan del contenedor */
 }
 
 label { 
@@ -59,6 +62,7 @@ label {
   padding: 1.5rem;
   box-shadow: var(--shadow);
   margin-bottom: 1.5rem;
+  overflow: hidden; /* Previene que el contenido se salga */
 }
 
 .grid { 
@@ -118,6 +122,7 @@ main {
   flex: 1; 
   padding: 2rem 3rem;
   transition: all 0.3s ease;
+  overflow-x: hidden; /* Previene scroll horizontal no deseado */
 }
 
 header {
@@ -125,6 +130,8 @@ header {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+  gap: 1rem;
 }
 
 /* ======== LOGIN ======== */
@@ -148,23 +155,36 @@ header {
   margin-bottom: 1rem;
 }
 
-/* ======== TABLE ======== */
+/* ======== TABLE RESPONSIVE ======== */
+.table-container {
+  overflow-x: auto;
+  margin-top: 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background: white;
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
-  overflow-x: auto;
-  display: block;
+  min-width: 600px; /* Ancho mínimo para tablas complejas */
 }
 
 .table th, .table td {
   padding: 0.75rem;
   border-bottom: 1px solid #ddd;
   text-align: left;
+  white-space: nowrap; /* Evita que el texto se divida en tablas pequeñas */
 }
 
 .table th {
   background: var(--secondary);
+  font-weight: 600;
+}
+
+/* Para tablas en móviles - diseño alternativo */
+.table-mobile {
+  display: none;
 }
 
 /* ======== HAMBURGER MENU ======== */
@@ -226,6 +246,11 @@ header {
   .login-container {
     width: 350px;
   }
+  
+  .table th, .table td {
+    padding: 0.6rem;
+    font-size: 0.95rem;
+  }
 }
 
 /* Mobile */
@@ -257,6 +282,7 @@ header {
     padding: 1rem;
     margin-left: 0;
     width: 100%;
+    box-sizing: border-box;
   }
   
   .grid-2,
@@ -269,6 +295,7 @@ header {
     max-width: 350px;
     margin-top: 5vh;
     padding: 1.5rem;
+    box-sizing: border-box;
   }
   
   header {
@@ -279,10 +306,59 @@ header {
   
   .card {
     padding: 1rem;
+    margin-bottom: 1rem;
   }
   
   .hamburger.active {
     left: 18rem;
+  }
+  
+  /* INPUTS EN MÓVIL */
+  input, select, textarea {
+    font-size: 16px; /* Previene zoom en iOS */
+    padding: 0.8rem;
+  }
+  
+  /* TABLAS EN MÓVIL */
+  .table {
+    min-width: 800px; /* Para tablas más anchas en móvil */
+  }
+  
+  .table th, .table td {
+    padding: 0.5rem 0.4rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Alternativa para tablas en móviles - convertir en tarjetas */
+  .table-responsive {
+    display: block;
+    width: 100%;
+  }
+  
+  .table-responsive thead {
+    display: none;
+  }
+  
+  .table-responsive tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: var(--radius);
+    padding: 0.5rem;
+  }
+  
+  .table-responsive td {
+    display: block;
+    text-align: right;
+    border: none;
+    padding: 0.5rem;
+  }
+  
+  .table-responsive td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
   }
 }
 
@@ -299,24 +375,32 @@ header {
   .login-container {
     width: 95%;
     padding: 1.2rem;
-  }
-  
-  .table {
-    font-size: 0.9rem;
+    margin-top: 2vh;
   }
   
   .table th, 
   .table td {
-    padding: 0.5rem;
+    padding: 0.4rem 0.3rem;
+    font-size: 0.85rem;
   }
   
   .btn {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
+    width: 100%; /* Botones a ancho completo en móviles muy pequeños */
+    text-align: center;
   }
   
   .hamburger.active {
     left: 16rem;
+  }
+  
+  input, select, textarea {
+    padding: 0.7rem;
+  }
+  
+  .card {
+    padding: 0.8rem;
   }
 }
 
@@ -333,4 +417,30 @@ header {
   .grid-3 {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+/* Prevención de desbordamiento global */
+* {
+  box-sizing: border-box;
+}
+
+/* Asegurar que los contenedores de inputs no se desborden */
+.form-group {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* Scroll suave para tablas en móviles */
+.table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
 }
