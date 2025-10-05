@@ -44,7 +44,6 @@ input, select, textarea {
 label { font-weight: 600; margin-top: 1rem; display: block; }
 
 .card {
-  width: 100%;
   background: white;
   border-radius: var(--radius);
   padding: 1.5rem;
@@ -98,11 +97,8 @@ label { font-weight: 600; margin-top: 1rem; display: block; }
 
 /* ======== MAIN CONTENT ======== */
 main {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: auto;    /* Mejor que hidden para tablas */
-  flex: 1;
-  padding: 1rem;       /* Reducir padding en general */
+  flex: 1; 
+  padding: 2rem 3rem;
 }
 
 header {
