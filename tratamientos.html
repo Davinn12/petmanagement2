@@ -3,57 +3,64 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PetManagement — Registro de Tratamientos</title>
+  <title>Tratamientos - PetManagement</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
-    <h1>🐾 PetManagement</h1>
-    <nav>
-      <a href="admin.html">Admin</a> |
-      <a href="dashboard.html">Dashboard</a> |
-      <a href="mascotas.html">Mascotas</a>
-    </nav>
-  </header>
-
-  <main class="form-wide">
-    <h2>Registro de Tratamientos</h2>
-
-    <div class="card">
-      <p><strong>Cliente:</strong> Walter</p>
-      <p><strong>Mascota:</strong> Firulais (Perro — Labrador)</p>
-      <p><strong>Servicio:</strong> Baño completo</p>
+  <aside class="sidebar">
+    <div>
+      <div class="logo">🐾 PetManagement</div>
+      <nav>
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="citas.html">📅 Citas</a>
+        <a href="mascotas.html">🐶 Mascotas</a>
+        <a href="planes.html">⭐ Planes</a>
+        <a href="admin.html">⚙️ Admin</a>
+      </nav>
     </div>
+    <div class="footer">© 2025 PetManagement</div>
+  </aside>
 
-    <form id="form-tratamiento" style="margin-top:12px;">
-      <label>Procedimientos realizados</label>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
-        <label><input type="checkbox" name="proc" value="Baño"> Baño</label>
-        <label><input type="checkbox" name="proc" value="Secado"> Secado</label>
-        <label><input type="checkbox" name="proc" value="Corte de uñas"> Corte de uñas</label>
-        <label><input type="checkbox" name="proc" value="Corte de pelo"> Corte de pelo</label>
+  <main>
+    <header><h1>Registro de Tratamientos</h1></header>
+
+    <section class="card">
+      <div class="info">
+        <p><strong>Cliente:</strong> <span id="info-cliente">Walter</span></p>
+        <p><strong>Mascota:</strong> <span id="info-mascota">Firulais (Perro)</span></p>
+        <p><strong>Servicio:</strong> <span id="info-servicio">Baño completo</span></p>
       </div>
 
-      <label>Observaciones</label>
-      <textarea name="observaciones" rows="3"></textarea>
+      <form id="form-tratamiento">
+        <label>Procedimientos realizados</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+          <label><input type="checkbox" name="proc" value="Baño"> Baño</label>
+          <label><input type="checkbox" name="proc" value="Secado"> Secado</label>
+          <label><input type="checkbox" name="proc" value="Corte de uñas"> Corte de uñas</label>
+          <label><input type="checkbox" name="proc" value="Corte de pelo"> Corte de pelo</label>
+        </div>
 
-      <label>Medicamentos aplicados</label>
-      <input type="text" name="medicamentos">
+        <label>Observaciones</label>
+        <textarea name="observaciones" rows="3"></textarea>
 
-      <label>Recomendaciones</label>
-      <textarea name="recomendaciones" rows="2"></textarea>
+        <label>Medicamentos aplicados</label>
+        <input type="text" name="medicamentos">
 
-      <label>Profesional a cargo</label>
-      <select name="profesional">
-        <option>Ana Pérez</option>
-        <option>Juan Gómez</option>
-      </select>
+        <label>Recomendaciones</label>
+        <textarea name="recomendaciones" rows="2"></textarea>
 
-      <div style="display:flex;gap:10px;margin-top:12px;">
-        <button type="button" class="primary-btn" id="btn-guardar-trat">Guardar Tratamiento</button>
-        <button type="button" class="secondary-btn" id="btn-generar-reporte">Generar Reporte</button>
-      </div>
-    </form>
+        <label>Profesional a cargo</label>
+        <select name="profesional">
+          <option>Ana Pérez</option>
+          <option>Juan Gómez</option>
+        </select>
+
+        <div style="margin-top:12px;display:flex;gap:10px;">
+          <button type="button" class="btn" id="btn-guardar-trat">Guardar Tratamiento</button>
+          <button type="button" class="btn" onclick="window.location.href='admin.html'">Cancelar</button>
+        </div>
+      </form>
+    </section>
   </main>
 
   <script src="js/main.js"></script>
