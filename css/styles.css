@@ -148,7 +148,7 @@ header {
 
 /* ======== RESPONSIVE MENU ======== */
 
-/* Botón hamburguesa (solo visible en móvil) */
+/* ======== BOTÓN HAMBURGUESA - ANIMACIÓN ======== */
 .hamburger {
   display: none;
   position: fixed;
@@ -159,21 +159,23 @@ header {
   border: none;
   border-radius: 8px;
   padding: 0.6rem 0.9rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   cursor: pointer;
   z-index: 1001;
   box-shadow: var(--shadow);
-  transition: var(--transition);
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
-.hamburger:hover {
+/* Efecto visual al abrir */
+.hamburger.active {
   background: #2e9964;
+  transform: rotate(90deg);
 }
 
-/* Ajustes para pantallas pequeñas */
+/* Solo visible en móvil */
 @media (max-width: 768px) {
-  body {
-    flex-direction: column;
+  .hamburger {
+    display: block;
   }
 
   .sidebar {
@@ -182,7 +184,7 @@ header {
     left: -100%;
     height: 100vh;
     width: 220px;
-    transition: var(--transition);
+    transition: left 0.3s ease;
     z-index: 1000;
   }
 
@@ -193,13 +195,9 @@ header {
   main {
     padding: 1.5rem;
   }
-
-  .hamburger {
-    display: block;
-  }
 }
 
-/* Opcional: overlay al abrir el menú */
+/* Overlay al abrir menú */
 .sidebar-overlay {
   display: none;
   position: fixed;
@@ -214,18 +212,3 @@ header {
 .sidebar-overlay.active {
   display: block;
 }
-
-/* ======== BOTÓN HAMBURGUESA - ESTADO ACTIVO ======== */
-.hamburger.active {
-  background: #2e9964;
-  transform: rotate(90deg);
-}
-
-@media (max-width: 768px) {
-  /* Oculta el botón cuando el menú esté abierto */
-  .sidebar.open ~ .hamburger {
-    display: none;
-  }
-}
-
-
