@@ -215,3 +215,17 @@ header {
   display: block;
 }
 
+/* ======== BOTÓN HAMBURGUESA - ESTADO ACTIVO ======== */
+.hamburger.active {
+  background: #2e9964;
+  transform: rotate(90deg);
+}
+
+@media (max-width: 768px) {
+  /* Oculta el botón cuando el menú esté abierto */
+  .sidebar.open ~ .hamburger {
+    display: none;
+  }
+}
+
+
