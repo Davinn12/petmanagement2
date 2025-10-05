@@ -1,5 +1,16 @@
 // js/main.js
 document.addEventListener('DOMContentLoaded', () => {
+  
+  // === TOGGLE MENU MOBILE ===
+  const hamburger = document.querySelector(".hamburger");
+  const sidebar = document.querySelector(".sidebar");
+
+  if (hamburger && sidebar) {
+    hamburger.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+    });
+  }
+  
   // Simular login simple (si viene de login)
   window.login = function() {
     const email = document.getElementById('email')?.value || 'usuario@demo';
