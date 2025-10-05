@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PetManagement — Agendamiento de Citas</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>🐾 PetManagement</h1>
+    <nav>
+      <a href="dashboard.html">Dashboard</a> |
+      <a href="mascotas.html">Mis Mascotas</a> |
+      <a href="planes.html">Planes</a> |
+      <a href="admin.html">Admin</a> |
+      <a href="rutas.html">Rutas</a>
+    </nav>
+  </header>
+
+  <main class="form-wide">
+    <h2>Agendar Cita</h2>
+
+    <form id="form-cita">
+      <label>Seleccionar Mascota
+        <select name="mascota" required>
+          <option value="Firulais">Firulais</option>
+          <option value="Michi">Michi</option>
+          <option value="Luna">Luna</option>
+        </select>
+      </label>
+
+      <label>Seleccionar Servicio
+        <select name="servicio" required>
+          <option value="Baño básico">Baño básico</option>
+          <option value="Corte de uñas">Corte de uñas</option>
+          <option value="Corte de pelo">Corte de pelo</option>
+        </select>
+      </label>
+
+      <div style="display:flex;gap:10px;">
+        <label style="flex:1;">Seleccionar Fecha
+          <input type="date" name="fecha" required>
+        </label>
+        <label style="flex:1;">Seleccionar Hora
+          <input type="time" name="hora" required>
+        </label>
+      </div>
+
+      <label>Seleccionar Profesional
+        <select name="profesional" required>
+          <option value="Ana Pérez">Ana Pérez</option>
+          <option value="Juan Gómez">Juan Gómez</option>
+          <option value="Dr. Gómez">Dr. Gómez</option>
+        </select>
+      </label>
+
+      <div class="card" id="resumen-cita" style="margin-top:12px;">
+        <h3>Resumen de la cita</h3>
+        <p id="txt-mascota">Mascota: —</p>
+        <p id="txt-servicio">Servicio: —</p>
+        <p id="txt-fecha">Fecha: —</p>
+        <p id="txt-prof">Profesional: —</p>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:12px;">
+        <button type="button" class="primary-btn" id="btn-confirmar">Confirmar Cita</button>
+        <button type="button" class="secondary-btn" onclick="window.location.href='dashboard.html'">Cancelar</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
