@@ -35,6 +35,7 @@ body {
   padding: 2rem 1rem;
   box-shadow: var(--shadow);
   transition: var(--transition);
+  z-index: 1000;
 }
 
 .sidebar h2 {
@@ -57,10 +58,31 @@ body {
   background: rgba(255, 255, 255, 0.15);
 }
 
+/* === BOTÓN HAMBURGUESA === */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  cursor: pointer;
+  z-index: 1100;
+  transition: var(--transition);
+}
+
+.hamburger:hover {
+  background: #003366;
+}
+
 /* === CONTENIDO === */
 .content {
   flex: 1;
   padding: 2rem;
+  transition: var(--transition);
 }
 
 .card {
@@ -136,21 +158,21 @@ button:hover {
   }
 
   .sidebar {
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    height: 100vh;
+    width: 220px;
+    padding-top: 4rem;
+    transition: var(--transition);
   }
 
-  .sidebar h2 {
-    display: none;
+  .sidebar.open {
+    left: 0;
   }
 
-  .sidebar a {
-    margin: 0;
-    padding: 0.5rem;
-    font-size: 0.9rem;
+  .hamburger {
+    display: block;
   }
 
   .content {
@@ -180,6 +202,10 @@ button:hover {
   }
 
   .sidebar a {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .hamburger {
+    padding: 0.5rem 0.7rem;
   }
 }
