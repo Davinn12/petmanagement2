@@ -1,26 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PetManagement - Login</title>
-  <link rel="stylesheet" href="css/styles.css" />
+  <meta charset="UTF-8">
+  <title>Login - PetManagement</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div class="container">
+  <div class="login-container">
     <h1>🐾 PetManagement</h1>
-    <form action="dashboard.html">
-      <label>Email</label>
-      <input type="email" placeholder="tu@email.com" required>
-
-      <label>Contraseña</label>
-      <input type="password" placeholder="********" required>
-
-      <button type="submit">Iniciar Sesión</button>
-
-      <p><a href="#" class="link">¿Olvidaste tu contraseña?</a></p>
-      <p>¿Nuevo usuario? <a href="registro.html" class="link">Regístrate aquí</a></p>
-    </form>
+    <input type="email" placeholder="Correo electrónico" id="email">
+    <input type="password" placeholder="Contraseña" id="password">
+    <button class="btn" onclick="login()">Iniciar sesión</button>
+    <p><a href="#">¿Olvidaste tu contraseña?</a></p>
+    <p>¿Nuevo usuario? <a href="registro.html">Regístrate aquí</a></p>
   </div>
+  <script src="js/main.js"></script>
 </body>
 </html>
