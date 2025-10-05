@@ -1,75 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PetManagement — Agendamiento de Citas</title>
+  <meta charset="UTF-8">
+  <title>Citas - PetManagement</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
-    <h1>🐾 PetManagement</h1>
-    <nav>
-      <a href="dashboard.html">Dashboard</a> |
-      <a href="mascotas.html">Mis Mascotas</a> |
-      <a href="planes.html">Planes</a> |
-      <a href="admin.html">Admin</a> |
-      <a href="rutas.html">Rutas</a>
-    </nav>
-  </header>
+  <aside class="sidebar">
+    <div>
+      <div class="logo">🐾 PetManagement</div>
+      <nav>
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="mascotas.html">🐶 Mis Mascotas</a>
+        <a href="citas.html" class="active">📅 Citas</a>
+        <a href="planes.html">⭐ Planes</a>
+        <a href="admin.html">⚙️ Administrador</a>
+      </nav>
+    </div>
+    <div class="footer">© 2025 PetManagement</div>
+  </aside>
 
-  <main class="form-wide">
-    <h2>Agendar Cita</h2>
-
-    <form id="form-cita">
-      <label>Seleccionar Mascota
-        <select name="mascota" required>
-          <option value="Firulais">Firulais</option>
-          <option value="Michi">Michi</option>
-          <option value="Luna">Luna</option>
+  <main>
+    <header><h1>Agendar Nueva Cita</h1></header>
+    <form class="card grid grid-2">
+      <div>
+        <label>Mascota</label>
+        <select><option>Luna</option><option>Rocky</option></select>
+        <label>Servicio</label>
+        <select>
+          <option>Vacunación</option>
+          <option>Baño</option>
+          <option>Consulta general</option>
         </select>
-      </label>
-
-      <label>Seleccionar Servicio
-        <select name="servicio" required>
-          <option value="Baño básico">Baño básico</option>
-          <option value="Corte de uñas">Corte de uñas</option>
-          <option value="Corte de pelo">Corte de pelo</option>
-        </select>
-      </label>
-
-      <div style="display:flex;gap:10px;">
-        <label style="flex:1;">Seleccionar Fecha
-          <input type="date" name="fecha" required>
-        </label>
-        <label style="flex:1;">Seleccionar Hora
-          <input type="time" name="hora" required>
-        </label>
       </div>
-
-      <label>Seleccionar Profesional
-        <select name="profesional" required>
-          <option value="Ana Pérez">Ana Pérez</option>
-          <option value="Juan Gómez">Juan Gómez</option>
-          <option value="Dr. Gómez">Dr. Gómez</option>
-        </select>
-      </label>
-
-      <div class="card" id="resumen-cita" style="margin-top:12px;">
-        <h3>Resumen de la cita</h3>
-        <p id="txt-mascota">Mascota: —</p>
-        <p id="txt-servicio">Servicio: —</p>
-        <p id="txt-fecha">Fecha: —</p>
-        <p id="txt-prof">Profesional: —</p>
+      <div>
+        <label>Fecha</label>
+        <input type="date">
+        <label>Hora</label>
+        <input type="time">
       </div>
-
-      <div style="display:flex;gap:12px;margin-top:12px;">
-        <button type="button" class="primary-btn" id="btn-confirmar">Confirmar Cita</button>
-        <button type="button" class="secondary-btn" onclick="window.location.href='dashboard.html'">Cancelar</button>
+      <div style="grid-column: 1 / span 2; text-align: right;">
+        <button class="btn">Confirmar Cita</button>
       </div>
     </form>
-  </main>
 
-  <script src="js/main.js"></script>
+    <section class="card">
+      <h2>Mis Citas Programadas</h2>
+      <table class="table">
+        <tr><th>Fecha</th><th>Hora</th><th>Servicio</th><th>Mascota</th><th>Estado</th></tr>
+        <tr><td>10/10/2025</td><td>09:00</td><td>Consulta</td><td>Luna</td><td>Pendiente</td></tr>
+        <tr><td>15/10/2025</td><td>11:00</td><td>Baño</td><td>Rocky</td><td>Pendiente</td></tr>
+      </table>
+    </section>
+  </main>
 </body>
 </html>
