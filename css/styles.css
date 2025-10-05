@@ -224,7 +224,7 @@ header {
 
 .hamburger.active {
   background: #2e9964;
-  left: 15rem;
+  left: 16rem;
   transform: rotate(90deg);
 }
 
