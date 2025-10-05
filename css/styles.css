@@ -1,0 +1,144 @@
+/* ---------- PALETA DE COLORES ---------- */
+:root {
+  --color-primary: #4CAF50;
+  --color-secondary: #2196F3;
+  --color-accent: #FF9800;
+  --color-bg: #f7fdf9;
+  --color-text: #333;
+  --radius: 10px;
+}
+
+/* ---------- RESETEO ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+}
+
+/* ---------- CONTENEDORES ---------- */
+.container {
+  width: 90%;
+  max-width: 400px;
+  margin: 60px auto;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+h1, h2, h3 {
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* ---------- INPUTS Y BOTONES ---------- */
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0 16px;
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  transition: border 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--color-secondary);
+  outline: none;
+}
+
+button {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.link {
+  color: var(--color-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* ---------- DASHBOARD / TARJETAS ---------- */
+.dashboard {
+  max-width: 1000px;
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* ---------- HEADER ---------- */
+header {
+  background: var(--color-primary);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+header a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+/* ---------- LISTAS ---------- */
+.list {
+  background: white;
+  padding: 1rem;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.list-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+/* ---------- FORMULARIOS GRANDES ---------- */
+.form-wide {
+  max-width: 600px;
+  margin: 30px auto;
+  background: white;
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
