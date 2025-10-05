@@ -1,127 +1,162 @@
-/* js/main.js - funciones simples para formularios y admin */
+// js/main.js
 document.addEventListener('DOMContentLoaded', () => {
-  // actualizar resumen en citas si existe
-  const formCita = document.getElementById('form-cita');
-  if (formCita) {
-    const mascota = formCita.querySelector('[name=mascota]');
-    const servicio = formCita.querySelector('[name=servicio]');
-    const fecha = formCita.querySelector('[name=fecha]');
-    const hora = formCita.querySelector('[name=hora]');
-    const prof = formCita.querySelector('[name=profesional]');
-    const txtMascota = document.getElementById('txt-mascota');
-    const txtServicio = document.getElementById('txt-servicio');
-    const txtFecha = document.getElementById('txt-fecha');
-    const txtProf = document.getElementById('txt-prof');
+  // Simular login simple (si viene de login)
+  window.login = function() {
+    const email = document.getElementById('email')?.value || 'usuario@demo';
+    localStorage.setItem('pm_user', JSON.stringify({email, name: 'Usuario'}));
+    window.location.href = 'dashboard.html';
+  };
 
-    function actualizarResumen(){
-      txtMascota.textContent = 'Mascota: ' + (mascota.value || '—');
-      txtServicio.textContent = 'Servicio: ' + (servicio.value || '—');
-      txtFecha.textContent = 'Fecha: ' + ((fecha.value || '—') + (hora.value ? ' ' + hora.value : ''));
-      txtProf.textContent = 'Profesional: ' + (prof.value || '—');
-    }
-    [mascota, servicio, fecha, hora, prof].forEach(el => el && el.addEventListener('input', actualizarResumen));
-    actualizarResumen();
-
-    const btnConfirmar = document.getElementById('btn-confirmar');
-    if (btnConfirmar) {
-      btnConfirmar.addEventListener('click', () => {
-        const cita = {
-          mascota: mascota.value,
-          servicio: servicio.value,
-          fecha: fecha.value,
-          hora: hora.value,
-          profesional: prof.value,
-          createdAt: new Date().toISOString()
-        };
-        const list = JSON.parse(localStorage.getItem('citas') || '[]');
-        list.push(cita);
-        localStorage.setItem('citas', JSON.stringify(list));
-        alert('Cita confirmada ✓');
-        window.location.href = 'dashboard.html';
-      });
-    }
+  // Cargar usuario si existe
+  const user = JSON.parse(localStorage.getItem('pm_user') || 'null');
+  if (user) {
+    // si estamos en dashboard, mostrar nombre en header (si quieres)
+    // ejemplo simple: ajustar header h1 si existe
+    const head = document.querySelector('main header h1');
+    if (head) head.textContent = `Bienvenido, ${user.name} 👋`;
   }
 
-  // admin: tabs
-  window.showAdminTab = function(tabId) {
-    document.querySelectorAll('.admin-tab').forEach(s => s.classList.add('hidden'));
-    const el = document.getElementById(tabId);
-    if (el) el.classList.remove('hidden');
+  // Citas: guardar desde /citas.html
+  const citasForm = document.querySelector('form.card.grid-2');
+  if (citasForm && window.location.pathname.includes('citas.html')) {
+    citasForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = {
+        mascota: citasForm.querySelector('select:nth-of-type(1)').value,
+        servicio: citasForm.querySelector('select:nth-of-type(2)').value,
+        fecha: citasForm.querySelector('input[type="date"]').value,
+        hora: citasForm.querySelector('input[type="time"]').value,
+        createdAt: new Date().toISOString()
+      };
+      const arr = JSON.parse(localStorage.getItem('pm_citas') || '[]');
+      arr.push(data);
+      localStorage.setItem('pm_citas', JSON.stringify(arr));
+      alert('Cita guardada ✓');
+      window.location.href = 'dashboard.html';
+    });
+  }
+
+  // Si estamos en admin, cargar tabla de citas
+  if (window.location.pathname.includes('admin.html')) {
+    renderAdminCitas();
+    renderPersonalList();
+  }
+
+  function renderAdminCitas() {
+    const tbody = document.querySelector('#admin-citas-table tbody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    const arr = JSON.parse(localStorage.getItem('pm_citas') || '[]');
+    if (arr.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="4">No hay citas programadas</td></tr>';
+      return;
+    }
+    arr.forEach((c, i) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${c.fecha} ${c.hora || ''}</td>
+        <td>${c.mascota}</td>
+        <td>${c.createdAt ? (new Date(c.createdAt)).toLocaleString() : '-'}</td>
+        <td>
+          <button class="btn" onclick="iniciarCita(${i})">Iniciar</button>
+          <button class="btn" onclick="finalizarCita(${i})">Finalizar</button>
+        </td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  window.iniciarCita = function(index) {
+    alert(`Cita ${index+1} iniciada (simulado)`);
   };
 
-  // admin: iniciar/finalizar cita
-  window.iniciarCita = function(btn) {
-    const row = btn.closest('tr');
-    row.style.background = 'linear-gradient(90deg, rgba(76,175,80,0.06), transparent)';
-    alert('Cita iniciada');
-  };
-  window.finalizarCita = function(btn) {
-    const row = btn.closest('tr');
-    row.style.opacity = '0.7';
-    alert('Cita finalizada — abre registro de tratamiento si aplica');
-    // redirigir a formulario de tratamiento
+  window.finalizarCita = function(index) {
+    alert(`Cita ${index+1} finalizada — dirigiendo a formulario de tratamiento`);
     window.location.href = 'tratamientos.html';
   };
 
-  // admin: guardar tratamiento rápido
+  // Admin: guardar tratamiento desde admin tab
   window.guardarTratamientoAdmin = function() {
     const form = document.getElementById('admin-trat-form');
     if (!form) return;
     const data = {
+      cliente: form.cliente.value,
+      mascota: form.mascota.value,
       procedimientos: form.procedimientos.value,
       observaciones: form.observaciones.value,
       medicamentos: form.medicamentos.value,
       profesional: form.profesional.value,
       at: new Date().toISOString()
     };
-    const arr = JSON.parse(localStorage.getItem('tratamientos') || '[]');
+    const arr = JSON.parse(localStorage.getItem('pm_tratamientos') || '[]');
     arr.push(data);
-    localStorage.setItem('tratamientos', JSON.stringify(arr));
+    localStorage.setItem('pm_tratamientos', JSON.stringify(arr));
     alert('Tratamiento guardado ✓');
-    showAdminTab('citasDia');
+    showAdminTab('tab-citas');
   };
 
-  // tratamientos.html: guardar tratamiento y generar reporte
+  // tratamientos.html: guardar tratamiento y generar reporte simple
   const btnGuardarTrat = document.getElementById('btn-guardar-trat');
-  if (btnGuardarTrat){
+  if (btnGuardarTrat) {
     btnGuardarTrat.addEventListener('click', () => {
       const form = document.getElementById('form-tratamiento');
-      const checkboxs = Array.from(form.querySelectorAll('input[name="proc"]:checked')).map(i=>i.value);
+      const procedimientos = Array.from(form.querySelectorAll('input[name="proc"]:checked')).map(i=>i.value);
       const data = {
-        procedimientos: checkboxs,
+        procedimientos,
         observaciones: form.observaciones.value,
         medicamentos: form.medicamentos.value,
         recomendaciones: form.recomendaciones.value,
         profesional: form.profesional.value,
         at: new Date().toISOString()
       };
-      const arr = JSON.parse(localStorage.getItem('tratamientos') || '[]');
+      const arr = JSON.parse(localStorage.getItem('pm_tratamientos') || '[]');
       arr.push(data);
-      localStorage.setItem('tratamientos', JSON.stringify(arr));
+      localStorage.setItem('pm_tratamientos', JSON.stringify(arr));
       alert('Tratamiento guardado ✓');
+      window.location.href = 'admin.html';
     });
   }
 
-  const btnGenReporte = document.getElementById('btn-generar-reporte');
-  if (btnGenReporte) {
-    btnGenReporte.addEventListener('click', () => {
-      const arr = JSON.parse(localStorage.getItem('tratamientos') || '[]');
-      const last = arr[arr.length - 1] || {};
-      const content = `Reporte de Tratamiento\n\n${JSON.stringify(last,null,2)}`;
-      const blob = new Blob([content], {type: 'text/plain'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'reporte_tratamiento.txt';
-      a.click();
-      URL.revokeObjectURL(url);
-    });
+  // Admin: personal
+  window.agregarPersonal = function() {
+    const form = document.getElementById('add-personal-form');
+    if (!form) return;
+    const nombre = form.nombre.value;
+    const especialidad = form.especialidad.value;
+    if (!nombre) { alert('Ingrese nombre'); return; }
+    const arr = JSON.parse(localStorage.getItem('pm_personal') || '[]');
+    arr.push({nombre, especialidad});
+    localStorage.setItem('pm_personal', JSON.stringify(arr));
+    renderPersonalList();
+    form.reset();
+  };
+
+  function renderPersonalList() {
+    const list = document.getElementById('personal-list');
+    if (!list) return;
+    const arr = JSON.parse(localStorage.getItem('pm_personal') || '[]');
+    list.innerHTML = arr.length ? arr.map(p => `<div class="list-item">${p.nombre} — ${p.especialidad}</div>`).join('') : '<p>No hay personal registrado</p>';
   }
 
-  // rutas: optimizar (simulación)
-  const btnOptimizar = document.getElementById('btn-optimizar');
-  if (btnOptimizar) {
-    btnOptimizar.addEventListener('click', () => {
-      alert('Ruta optimizada (simulación). Se reordenaron las paradas para minimizar tiempo.');
-    });
-  }
+  // Reportes (simples)
+  window.generarReporte = function(tipo) {
+    let data = [];
+    if (tipo === 'citas') data = JSON.parse(localStorage.getItem('pm_citas') || '[]');
+    if (tipo === 'tratamientos') data = JSON.parse(localStorage.getItem('pm_tratamientos') || '[]');
+    const content = `${tipo.toUpperCase()} - ${new Date().toLocaleString()}\n\n` + JSON.stringify(data, null, 2);
+    const blob = new Blob([content], {type: 'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = `${tipo}_reporte.txt`; a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // Tabs helper
+  window.showAdminTab = function(id) {
+    document.querySelectorAll('.admin-tab').forEach(s => s.classList.add('hidden'));
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('hidden');
+  };
+
+  // Optimizar ruta (simulado)
+  const btnOpt = document.getElementById('btn-optimizar');
+  if (btnOpt) btnOpt.addEventListener('click', () => alert('Rutas optimizadas (simulación).'));
 });
