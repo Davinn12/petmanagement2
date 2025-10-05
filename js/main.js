@@ -10,13 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (hamburger && sidebar) {
     hamburger.addEventListener("click", () => {
-      sidebar.classList.toggle("open");
-      overlay.classList.toggle("active");
+      const isOpen = sidebar.classList.toggle("open");
+      overlay.classList.toggle("active", isOpen);
+      hamburger.classList.toggle("active", isOpen);
     });
 
     overlay.addEventListener("click", () => {
       sidebar.classList.remove("open");
       overlay.classList.remove("active");
+      hamburger.classList.remove("active");
     });
   }
   
