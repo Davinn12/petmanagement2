@@ -208,13 +208,13 @@ header {
 .hamburger {
   display: none;
   position: fixed;
-  top: 0.3rem;
+  top: 0.2rem;
   left: 1rem;
   background: var(--primary);
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 0.6rem 0.9rem;
+  padding: 0.2rem 0.4rem;
   font-size: 1.4rem;
   cursor: pointer;
   z-index: 1001;
@@ -224,7 +224,7 @@ header {
 
 .hamburger.active {
   background: #2e9964;
-  left: 16rem;
+  left: 15rem;
   transform: rotate(90deg);
 }
 
