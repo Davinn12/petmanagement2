@@ -2,34 +2,54 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard - PetManagement</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
-    <h1>🐾 PetManagement</h1>
-    <a href="index.html">Cerrar sesión</a>
-  </header>
+  <aside class="sidebar">
+    <div>
+      <div class="logo">🐾 PetManagement</div>
+      <nav>
+        <a href="dashboard.html" class="active">📊 Dashboard</a>
+        <a href="mascotas.html">🐶 Mis Mascotas</a>
+        <a href="citas.html">📅 Citas</a>
+        <a href="planes.html">⭐ Planes</a>
+        <a href="admin.html">⚙️ Administrador</a>
+      </nav>
+    </div>
+    <div class="footer">© 2025 PetManagement</div>
+  </aside>
 
-  <div class="dashboard">
-    <div class="card" onclick="window.location='citas.html'">
-      📅 <h3>Agendar Servicio</h3>
-    </div>
-    <div class="card" onclick="window.location='mascotas.html'">
-      🐕 <h3>Mis Mascotas</h3>
-    </div>
-    <div class="card" onclick="window.location='planes.html'">
-      ⭐ <h3>Planes Disponibles</h3>
-    </div>
-    <div class="card" onclick="window.location='admin.html'">
-      ⚙️ <h3>Panel Administrador</h3>
-    </div>
-  </div>
+  <main>
+    <header>
+      <h1>Bienvenido, Cliente 🐕</h1>
+      <a href="index.html" class="btn">Cerrar sesión</a>
+    </header>
 
-  <div class="list" style="max-width:800px;margin:30px auto;">
-    <h3>Próximas Citas</h3>
-    <div class="list-item">Luna – Baño completo – 6 Oct 2025, 3:00 PM</div>
-  </div>
+    <section class="grid grid-3">
+      <div class="card">
+        <h3>🐾 Mascotas Registradas</h3>
+        <p><strong>3</strong> Mascotas activas</p>
+      </div>
+      <div class="card">
+        <h3>📅 Próximas Citas</h3>
+        <p>2 servicios programados</p>
+      </div>
+      <div class="card">
+        <h3>⭐ Plan Actual</h3>
+        <p>Plan Premium (vigente hasta 15/12/2025)</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Historial de Citas Recientes</h2>
+      <table class="table">
+        <tr><th>Fecha</th><th>Mascota</th><th>Servicio</th><th>Estado</th></tr>
+        <tr><td>05/10/2025</td><td>Luna</td><td>Vacunación</td><td>Completado</td></tr>
+        <tr><td>29/09/2025</td><td>Rocky</td><td>Baño</td><td>Completado</td></tr>
+        <tr><td>20/09/2025</td><td>Simba</td><td>Desparasitación</td><td>Completado</td></tr>
+      </table>
+    </section>
+  </main>
 </body>
 </html>
