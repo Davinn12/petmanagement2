@@ -3,54 +3,48 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PetManagement — Rutas de Vehículos</title>
+  <title>Rutas - PetManagement</title>
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    /* Pequeño ajuste para layout de mapa/side */
     .map-layout { display:flex; gap:16px; align-items:flex-start; }
-    .map-box { flex:1; min-height:420px; border-radius:12px; background:linear-gradient(180deg,#eef7ff,#ffffff); display:flex;align-items:center;justify-content:center; }
+    .map-box { flex:1; min-height:420px; border-radius:12px; background:linear-gradient(180deg,#eef7ff,#ffffff); display:flex;align-items:center;justify-content:center; font-size:1.1rem; }
     .route-side { width:360px; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🐾 PetManagement</h1>
-    <nav>
-      <a href="dashboard.html">Dashboard</a> |
-      <a href="admin.html">Admin</a> |
-      <a href="citas.html">Citas</a>
-    </nav>
-  </header>
+  <aside class="sidebar">
+    <div>
+      <div class="logo">🐾 PetManagement</div>
+      <nav>
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="citas.html">📅 Citas</a>
+        <a href="mascotas.html">🐶 Mascotas</a>
+        <a href="planes.html">⭐ Planes</a>
+        <a href="rutas.html" class="active">🚐 Rutas</a>
+      </nav>
+    </div>
+    <div class="footer">© 2025 PetManagement</div>
+  </aside>
 
-  <main class="form-wide">
-    <h2>Rutas de Vehículos</h2>
+  <main>
+    <header><h1>Rutas a Domicilio</h1></header>
 
-    <div class="map-layout">
-      <div class="map-box" id="map-placeholder">
-        🗺️ Aquí iría el mapa (Google Maps / Mapbox)
-      </div>
+    <section class="card map-layout">
+      <div class="map-box" id="map-placeholder">🗺️ Mapa (placeholder) — integra Google Maps o Mapbox aquí</div>
 
       <aside class="route-side">
-        <div class="list">
-          <h4>Direcciones & Horarios</h4>
-          <div class="list-item">
-            <strong>08:00</strong> — Calle 1 #45 — Juan Pérez <br><small>Profesional: Ana Pérez</small>
-            <div style="margin-top:6px;"><span>ETA siguiente: 12 min</span></div>
+        <div class="card">
+          <h3>Próximas visitas</h3>
+          <div class="list">
+            <div class="list-item"><strong>08:00</strong> — Calle 12 #45 — Juan Pérez <br><small>Profesional: Ana Pérez</small></div>
+            <div class="list-item"><strong>09:30</strong> — Carrera 5 #21 — Carlos Ruiz <br><small>Profesional: Juan Gómez</small></div>
           </div>
-
-          <div class="list-item">
-            <strong>09:30</strong> — Carrera 8 #21 — Carlos Ruiz <br><small>Profesional: Juan Gómez</small>
-            <div style="margin-top:6px;"><span>ETA siguiente: 8 min</span></div>
+          <div style="margin-top:12px;">
+            <button class="btn" id="btn-optimizar">Optimizar Ruta</button>
           </div>
-        </div>
-
-        <div style="margin-top:12px;">
-          <button class="primary-btn" id="btn-optimizar">Optimizar Ruta</button>
         </div>
       </aside>
-    </div>
-
-    <p style="margin-top:12px;"><a class="link" href="admin.html">⬅️ Volver al Panel</a></p>
+    </section>
   </main>
 
   <script src="js/main.js"></script>
