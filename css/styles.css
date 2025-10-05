@@ -155,9 +155,10 @@ header {
   margin-bottom: 1rem;
 }
 
-/* ======== TABLE FIX - SOLO ESTO CAMBIAMOS ======== */
+/* ======== TABLES ======== */
 .table-container {
   overflow-x: auto;
+  overflow-y: hidden;
   margin-top: 1rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -295,13 +296,23 @@ header {
   }
   
   /* TABLAS EN MÓVIL */
+  .table-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .table {
-    min-width: 800px;
+    width: 100%;
+    min-width: unset;
+    display: block;
   }
   
-  .table th, .table td {
+  .table th, 
+  .table td {
     padding: 0.5rem 0.4rem;
     font-size: 0.9rem;
+    white-space: nowrap;
   }
 }
 
@@ -328,7 +339,8 @@ header {
   }
   
   .table {
-    min-width: 900px;
+    width: 100%;
+    min-width: unset;
   }
   
   .btn {
