@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PetManagement — Panel Administrador</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>🐾 PetManagement — Admin</h1>
+    <nav>
+      <a href="dashboard.html">Dashboard</a> |
+      <a href="citas.html">Citas</a> |
+      <a href="mascotas.html">Mascotas</a> |
+      <a href="rutas.html">Rutas</a>
+    </nav>
+  </header>
+
+  <main class="form-wide">
+    <h2>Panel de Administración</h2>
+
+    <div class="tabs" style="display:flex;gap:8px;margin-bottom:12px;">
+      <button onclick="showAdminTab('citasDia')" class="tab-btn">Citas del Día</button>
+      <button onclick="showAdminTab('registroTratamientos')" class="tab-btn">Registro de Tratamientos</button>
+      <button onclick="showAdminTab('gestionPersonal')" class="tab-btn">Gestión de Personal</button>
+      <button onclick="showAdminTab('reportes')" class="tab-btn">Reportes</button>
+    </div>
+
+    <!-- Citas del Día -->
+    <section id="citasDia" class="admin-tab">
+      <h3>Citas del Día</h3>
+      <table class="table">
+        <thead>
+          <tr><th>Hora</th><th>Mascota</th><th>Cliente</th><th>Acciones</th></tr>
+        </thead>
+        <tbody id="tabla-citas">
+          <tr>
+            <td>09:00</td>
+            <td>Firulais</td>
+            <td>Walter</td>
+            <td>
+              <button class="small" onclick="iniciarCita(this)">Iniciar</button>
+              <button class="small secondary" onclick="finalizarCita(this)">Finalizar</button>
+            </td>
+          </tr>
+          <tr>
+            <td>10:30</td>
+            <td>Luna</td>
+            <td>María</td>
+            <td>
+              <button class="small" onclick="iniciarCita(this)">Iniciar</button>
+              <button class="small secondary" onclick="finalizarCita(this)">Finalizar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Registro de Tratamientos -->
+    <section id="registroTratamientos" class="admin-tab hidden">
+      <h3>Registro de Tratamientos (rápido)</h3>
+      <form id="admin-trat-form">
+        <label>Procedimientos realizados (breve)</label>
+        <textarea name="procedimientos" rows="3"></textarea>
+
+        <label>Observaciones</label>
+        <textarea name="observaciones" rows="2"></textarea>
+
+        <label>Medicamentos aplicados</label>
+        <input type="text" name="medicamentos">
+
+        <label>Profesional a cargo</label>
+        <select name="profesional">
+          <option>Ana Pérez</option>
+          <option>Juan Gómez</option>
+        </select>
+
+        <div style="margin-top:10px;">
+          <button type="button" class="primary-btn" onclick="guardarTratamientoAdmin()">Guardar Tratamiento</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Gestión de Personal -->
+    <section id="gestionPersonal" class="admin-tab hidden">
+      <h3>Gestión de Personal</h3>
+      <div class="list">
+        <div class="list-item">Ana Pérez — Groomer</div>
+        <div class="list-item">Juan Gómez — Veterinario</div>
+      </div>
+      <div style="margin-top:12px;">
+        <button class="primary-btn" onclick="alert('Interfaz para agregar personal')">Agregar Profesional</button>
+      </div>
+    </section>
+
+    <!-- Reportes -->
+    <section id="reportes" class="admin-tab hidden">
+      <h3>Reportes</h3>
+      <p>Genera estadísticas y reportes mensuales desde aquí.</p>
+      <button class="primary-btn" onclick="alert('Generando reporte...')">Generar Reporte</button>
+    </section>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
