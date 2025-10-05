@@ -38,6 +38,7 @@ a {
   background: #2e9964; 
 }
 
+/* INPUTS RESPONSIVE */
 input, select, textarea {
   width: 100%;
   padding: 0.7rem;
@@ -46,6 +47,7 @@ input, select, textarea {
   border-radius: var(--radius);
   font-size: 1rem;
   box-sizing: border-box;
+  max-width: 100%;
 }
 
 label { 
@@ -60,6 +62,7 @@ label {
   padding: 1.5rem;
   box-shadow: var(--shadow);
   margin-bottom: 1.5rem;
+  overflow: hidden;
 }
 
 .grid { 
@@ -82,6 +85,7 @@ label {
   justify-content: space-between;
   padding: 2rem 1rem;
   box-shadow: var(--shadow);
+  transition: transform 0.3s ease;
 }
 
 .sidebar .logo {
@@ -117,6 +121,8 @@ label {
 main {
   flex: 1; 
   padding: 2rem 3rem;
+  transition: all 0.3s ease;
+  overflow-x: hidden;
 }
 
 header {
@@ -124,6 +130,8 @@ header {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 /* ======== LOGIN ======== */
@@ -147,55 +155,56 @@ header {
   margin-bottom: 1rem;
 }
 
-/* ======== TABLE RESPONSIVE FIXED ======== */
+/* ======== TABLE FIX - SOLO ESTO CAMBIAMOS ======== */
+.table-container {
+  overflow-x: auto;
+  margin-top: 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background: white;
+  -webkit-overflow-scrolling: touch;
+  display: block;
+  width: 100%;
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
-  min-width: 800px; /* Fuerza el scroll horizontal */
+  min-width: 600px;
 }
 
 .table th, .table td {
   padding: 0.75rem;
   border-bottom: 1px solid #ddd;
   text-align: left;
-  white-space: nowrap; /* Evita que el texto se rompa */
+  white-space: nowrap;
 }
 
 .table th {
   background: var(--secondary);
-  position: sticky;
-  left: 0;
+  font-weight: 600;
 }
 
-/* Contenedor para el scroll - usando solo clases existentes */
-.card .table,
-main .table {
-  overflow-x: auto;
-  display: block;
-  width: 100%;
+/* Scrollbar para tablas */
+.table-container::-webkit-scrollbar {
+  height: 10px;
 }
 
-/* Scrollbar personalizado */
-.table::-webkit-scrollbar {
-  height: 12px;
-}
-
-.table::-webkit-scrollbar-track {
+.table-container::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 4px;
 }
 
-.table::-webkit-scrollbar-thumb {
+.table-container::-webkit-scrollbar-thumb {
   background: var(--primary);
   border-radius: 4px;
 }
 
-.table::-webkit-scrollbar-thumb:hover {
+.table-container::-webkit-scrollbar-thumb:hover {
   background: #2e9964;
 }
 
-/* ======== BOTÓN HAMBURGUESA - ANIMACIÓN ======== */
+/* ======== HAMBURGER MENU ======== */
 .hamburger {
   display: none;
   position: fixed;
@@ -219,7 +228,49 @@ main .table {
   transform: rotate(90deg);
 }
 
-/* Solo visible en móvil */
+/* ======== OVERLAY ======== */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* ======== RESPONSIVE DESIGN ======== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  main {
+    padding: 1.5rem 2rem;
+  }
+  
+  .sidebar {
+    width: 220px;
+  }
+  
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .login-container {
+    width: 350px;
+  }
+  
+  .table th, .table td {
+    padding: 0.6rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .hamburger {
     display: block;
@@ -242,66 +293,22 @@ main .table {
   main {
     padding: 1.5rem;
   }
-
+  
   /* TABLAS EN MÓVIL */
   .table {
-    min-width: 1000px; /* Más ancho para forzar scroll en móviles */
-    font-size: 0.9rem;
+    min-width: 800px;
   }
-
+  
   .table th, .table td {
-    padding: 0.6rem;
-  }
-
-  /* Scrollbar más visible en móviles */
-  .table::-webkit-scrollbar {
-    height: 10px;
-  }
-}
-
-/* Overlay al abrir menú */
-.sidebar-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 999;
-}
-
-.sidebar-overlay.active {
-  display: block;
-}
-
-/* Tablets */
-@media (max-width: 1024px) {
-  main {
-    padding: 1.5rem 2rem;
-  }
-  
-  .sidebar {
-    width: 220px;
-  }
-  
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .login-container {
-    width: 350px;
-  }
-  
-  .table {
-    min-width: 900px;
+    padding: 0.5rem 0.4rem;
+    font-size: 0.9rem;
   }
 }
 
 /* Small Mobile */
 @media (max-width: 480px) {
   main {
-    padding: 1rem;
+    padding: 0.8rem;
   }
   
   .sidebar {
@@ -314,13 +321,14 @@ main .table {
     margin-top: 2vh;
   }
   
-  .table {
-    min-width: 1100px; /* Aún más ancho para móviles pequeños */
+  .table th, 
+  .table td {
+    padding: 0.4rem 0.3rem;
+    font-size: 0.85rem;
   }
   
-  .table th, .table td {
-    padding: 0.5rem;
-    font-size: 0.85rem;
+  .table {
+    min-width: 900px;
   }
   
   .btn {
@@ -342,9 +350,9 @@ main .table {
   .grid-3 {
     grid-template-columns: repeat(4, 1fr);
   }
-  
-  .table {
-    min-width: auto; /* En pantallas grandes, no forzar scroll */
-    width: 100%;
-  }
+}
+
+/* Prevención de desbordamiento global */
+* {
+  box-sizing: border-box;
 }
