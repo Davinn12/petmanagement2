@@ -1,211 +1,147 @@
-/* === VARIABLES Y BASE === */
 :root {
-  --color-bg: #f6fffc;
-  --color-primary: #004080;
-  --color-secondary: #2e8b57;
-  --color-text: #1a2b49;
-  --color-white: #fff;
-  --border-radius: 12px;
-  --shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  --transition: all 0.3s ease;
+  --primary: #43b27a;
+  --secondary: #e8f9f2;
+  --bg: #f6fefc;
+  --text: #1d3557;
+  --radius: 12px;
+  --shadow: 0 4px 10px rgba(0,0,0,0.1);
+  --transition: 0.3s ease;
+  font-family: "Inter", sans-serif;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
   margin: 0;
-  padding: 0;
-  background: var(--color-bg);
-  color: var(--color-text);
-}
-
-/* === LAYOUT GENERAL === */
-.container {
+  background: var(--bg);
+  color: var(--text);
   display: flex;
   min-height: 100vh;
-  width: 100%;
 }
 
-/* === SIDEBAR === */
+a { text-decoration: none; color: inherit; }
+
+.btn {
+  display: inline-block;
+  background: var(--primary);
+  color: white;
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.btn:hover { background: #2e9964; }
+
+input, select, textarea {
+  width: 100%;
+  padding: 0.7rem;
+  margin-top: 0.4rem;
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
+  font-size: 1rem;
+}
+
+label { font-weight: 600; margin-top: 1rem; display: block; }
+
+.card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+}
+
+.grid { display: grid; gap: 1rem; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* ======== SIDEBAR ======== */
 .sidebar {
-  width: 260px;
-  background: var(--color-primary);
-  color: var(--color-white);
+  background: var(--secondary);
+  width: 250px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   padding: 2rem 1rem;
   box-shadow: var(--shadow);
-  transition: var(--transition);
-  z-index: 1000;
 }
 
-.sidebar h2 {
+.sidebar .logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
   text-align: center;
   margin-bottom: 2rem;
 }
 
-.sidebar a {
-  color: var(--color-white);
-  text-decoration: none;
-  padding: 0.75rem 1rem;
-  border-radius: var(--border-radius);
+.sidebar nav a {
   display: block;
-  margin-bottom: 0.5rem;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius);
+  margin: 0.3rem 0;
+  font-weight: 500;
   transition: var(--transition);
 }
 
-.sidebar a:hover,
-.sidebar a.active {
-  background: rgba(255, 255, 255, 0.15);
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background: var(--primary);
+  color: white;
 }
 
-/* === BOTÓN HAMBURGUESA === */
-.hamburger {
-  display: none;
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  background: var(--color-primary);
-  color: var(--color-white);
-  border: none;
-  border-radius: 8px;
-  padding: 0.6rem 0.8rem;
-  cursor: pointer;
-  z-index: 1100;
-  transition: var(--transition);
+.sidebar .footer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: gray;
 }
 
-.hamburger:hover {
-  background: #003366;
-}
-
-/* === CONTENIDO === */
-.content {
+/* ======== MAIN CONTENT ======== */
+main {
   flex: 1;
-  padding: 2rem;
-  transition: var(--transition);
+  padding: 2rem 3rem;
 }
 
-.card {
-  background: var(--color-white);
-  padding: 2rem;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 2rem;
 }
 
-/* === FORMULARIOS === */
-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+/* ======== LOGIN ======== */
+.login-container {
+  background: white;
+  width: 400px;
+  margin: auto;
+  margin-top: 10vh;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
 }
 
-label {
-  font-weight: 600;
-  display: block;
-  margin-bottom: 0.25rem;
-  color: var(--color-text);
+.login-container h1 {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
 }
 
-input, select, textarea {
+.login-container input {
+  margin-bottom: 1rem;
+}
+
+/* ======== TABLE ======== */
+.table {
   width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.table th, .table td {
   padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: var(--border-radius);
-  font-size: 1rem;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
 }
 
-textarea {
-  resize: none;
-  min-height: 100px;
-}
-
-button {
-  background: var(--color-secondary);
-  color: var(--color-white);
-  border: none;
-  border-radius: var(--border-radius);
-  padding: 0.75rem 1.5rem;
-  cursor: pointer;
-  font-weight: 600;
-  transition: var(--transition);
-}
-
-button:hover {
-  background: #256f45;
-}
-
-/* === GRID DE FORMULARIO === */
-.form-group {
-  flex: 1 1 calc(50% - 1rem);
-  min-width: 260px;
-}
-
-/* === RESPONSIVE === */
-@media (max-width: 1024px) {
-  .sidebar {
-    width: 220px;
-  }
-
-  .content {
-    padding: 1.5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    height: 100vh;
-    width: 220px;
-    padding-top: 4rem;
-    transition: var(--transition);
-  }
-
-  .sidebar.open {
-    left: 0;
-  }
-
-  .hamburger {
-    display: block;
-  }
-
-  .content {
-    padding: 1rem;
-  }
-
-  .card {
-    padding: 1rem;
-  }
-
-  form {
-    flex-direction: column;
-  }
-
-  .form-group {
-    flex: 1 1 100%;
-  }
-
-  button {
-    width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  input, select, textarea {
-    font-size: 0.9rem;
-  }
-
-  .sidebar a {
-    font-size: 0.9rem;
-  }
-
-  .hamburger {
-    padding: 0.5rem 0.7rem;
-  }
+.table th {
+  background: var(--secondary);
 }
