@@ -2,45 +2,28 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro - PetManagement</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div class="container">
-    <h2>Registro de Usuario</h2>
-    <form action="mascotas.html">
-      <label>Nombre completo</label>
-      <input type="text" required>
-
-      <label>Email</label>
-      <input type="email" required>
-
-      <label>Contraseña</label>
-      <input type="password" required>
-
-      <label>Confirmar contraseña</label>
-      <input type="password" required>
-
-      <label>Teléfono</label>
-      <input type="tel" placeholder="+57 300 000 0000" required>
-
-      <label>Dirección</label>
-      <input type="text" required>
-
-      <label>Método de pago preferido</label>
+  <div class="login-container">
+    <h1>Crear cuenta</h1>
+    <form>
+      <input type="text" placeholder="Nombre completo" required>
+      <input type="email" placeholder="Correo electrónico" required>
+      <input type="password" placeholder="Contraseña" required>
+      <input type="password" placeholder="Confirmar contraseña" required>
+      <input type="tel" placeholder="Teléfono">
+      <input type="text" placeholder="Dirección">
       <select>
-        <option>Tarjeta de crédito</option>
+        <option>Método de pago preferido</option>
+        <option>Tarjeta</option>
         <option>Efectivo</option>
-        <option>Transferencia</option>
       </select>
-
-      <label><input type="checkbox" required> Acepto términos y condiciones</label>
-
-      <button type="submit">Registrarse</button>
-
-      <p>¿Ya tienes cuenta? <a href="index.html" class="link">Inicia sesión</a></p>
+      <label><input type="checkbox"> Acepto términos y condiciones</label>
+      <button class="btn">Registrarme</button>
     </form>
+    <p>¿Ya tienes cuenta? <a href="index.html">Inicia sesión</a></p>
   </div>
 </body>
 </html>
