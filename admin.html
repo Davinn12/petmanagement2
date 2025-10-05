@@ -3,65 +3,60 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PetManagement — Panel Administrador</title>
+  <title>Admin - PetManagement</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
-    <h1>🐾 PetManagement — Admin</h1>
-    <nav>
-      <a href="dashboard.html">Dashboard</a> |
-      <a href="citas.html">Citas</a> |
-      <a href="mascotas.html">Mascotas</a> |
-      <a href="rutas.html">Rutas</a>
-    </nav>
-  </header>
-
-  <main class="form-wide">
-    <h2>Panel de Administración</h2>
-
-    <div class="tabs" style="display:flex;gap:8px;margin-bottom:12px;">
-      <button onclick="showAdminTab('citasDia')" class="tab-btn">Citas del Día</button>
-      <button onclick="showAdminTab('registroTratamientos')" class="tab-btn">Registro de Tratamientos</button>
-      <button onclick="showAdminTab('gestionPersonal')" class="tab-btn">Gestión de Personal</button>
-      <button onclick="showAdminTab('reportes')" class="tab-btn">Reportes</button>
+  <aside class="sidebar">
+    <div>
+      <div class="logo">🐾 PetManagement</div>
+      <nav>
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="citas.html">📅 Citas</a>
+        <a href="mascotas.html">🐶 Mascotas</a>
+        <a href="planes.html">⭐ Planes</a>
+        <a href="admin.html" class="active">⚙️ Admin</a>
+      </nav>
     </div>
+    <div class="footer">© 2025 PetManagement</div>
+  </aside>
+
+  <main>
+    <header>
+      <h1>Panel de Administración</h1>
+    </header>
+
+    <section class="card">
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+        <button class="btn" onclick="showAdminTab('tab-citas')">Citas del Día</button>
+        <button class="btn" onclick="showAdminTab('tab-tratamientos')">Registro Tratamientos</button>
+        <button class="btn" onclick="showAdminTab('tab-personal')">Gestión de Personal</button>
+        <button class="btn" onclick="showAdminTab('tab-reportes')">Reportes</button>
+      </div>
+    </section>
 
     <!-- Citas del Día -->
-    <section id="citasDia" class="admin-tab">
-      <h3>Citas del Día</h3>
-      <table class="table">
-        <thead>
-          <tr><th>Hora</th><th>Mascota</th><th>Cliente</th><th>Acciones</th></tr>
-        </thead>
-        <tbody id="tabla-citas">
-          <tr>
-            <td>09:00</td>
-            <td>Firulais</td>
-            <td>Walter</td>
-            <td>
-              <button class="small" onclick="iniciarCita(this)">Iniciar</button>
-              <button class="small secondary" onclick="finalizarCita(this)">Finalizar</button>
-            </td>
-          </tr>
-          <tr>
-            <td>10:30</td>
-            <td>Luna</td>
-            <td>María</td>
-            <td>
-              <button class="small" onclick="iniciarCita(this)">Iniciar</button>
-              <button class="small secondary" onclick="finalizarCita(this)">Finalizar</button>
-            </td>
-          </tr>
+    <section id="tab-citas" class="card admin-tab">
+      <h2>Citas del Día</h2>
+      <table class="table" id="admin-citas-table">
+        <thead><tr><th>Hora</th><th>Mascota</th><th>Cliente</th><th>Acciones</th></tr></thead>
+        <tbody>
+          <!-- filas dinámicas -->
         </tbody>
       </table>
     </section>
 
     <!-- Registro de Tratamientos -->
-    <section id="registroTratamientos" class="admin-tab hidden">
-      <h3>Registro de Tratamientos (rápido)</h3>
+    <section id="tab-tratamientos" class="card admin-tab hidden">
+      <h2>Registro de Tratamientos</h2>
       <form id="admin-trat-form">
-        <label>Procedimientos realizados (breve)</label>
+        <label>Cliente</label>
+        <input type="text" name="cliente" placeholder="Nombre del cliente">
+
+        <label>Mascota</label>
+        <input type="text" name="mascota" placeholder="Nombre de la mascota">
+
+        <label>Procedimientos realizados</label>
         <textarea name="procedimientos" rows="3"></textarea>
 
         <label>Observaciones</label>
@@ -76,29 +71,38 @@
           <option>Juan Gómez</option>
         </select>
 
-        <div style="margin-top:10px;">
-          <button type="button" class="primary-btn" onclick="guardarTratamientoAdmin()">Guardar Tratamiento</button>
+        <div style="margin-top:12px;">
+          <button type="button" class="btn" onclick="guardarTratamientoAdmin()">Guardar Tratamiento</button>
         </div>
       </form>
     </section>
 
     <!-- Gestión de Personal -->
-    <section id="gestionPersonal" class="admin-tab hidden">
-      <h3>Gestión de Personal</h3>
-      <div class="list">
-        <div class="list-item">Ana Pérez — Groomer</div>
-        <div class="list-item">Juan Gómez — Veterinario</div>
+    <section id="tab-personal" class="card admin-tab hidden">
+      <h2>Gestión de Personal</h2>
+      <div id="personal-list" class="list">
+        <!-- lista dinámica -->
       </div>
-      <div style="margin-top:12px;">
-        <button class="primary-btn" onclick="alert('Interfaz para agregar personal')">Agregar Profesional</button>
-      </div>
+
+      <form id="add-personal-form" style="margin-top:12px;">
+        <label>Nombre</label>
+        <input type="text" name="nombre" placeholder="Nombre completo">
+        <label>Especialidad</label>
+        <input type="text" name="especialidad" placeholder="Ej: Veterinario, Groomer">
+        <div style="margin-top:8px;">
+          <button type="button" class="btn" onclick="agregarPersonal()">Agregar Profesional</button>
+        </div>
+      </form>
     </section>
 
     <!-- Reportes -->
-    <section id="reportes" class="admin-tab hidden">
-      <h3>Reportes</h3>
-      <p>Genera estadísticas y reportes mensuales desde aquí.</p>
-      <button class="primary-btn" onclick="alert('Generando reporte...')">Generar Reporte</button>
+    <section id="tab-reportes" class="card admin-tab hidden">
+      <h2>Reportes</h2>
+      <p>Genera reportes básicos desde los datos locales (simulado).</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" onclick="generarReporte('citas')">Reporte de Citas</button>
+        <button class="btn" onclick="generarReporte('tratamientos')">Reporte de Tratamientos</button>
+      </div>
     </section>
   </main>
 
