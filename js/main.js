@@ -13,12 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const isOpen = sidebar.classList.toggle("open");
       overlay.classList.toggle("active", isOpen);
       hamburger.classList.toggle("active", isOpen);
+      hamburger.textContent = isOpen ? "✕" : "☰"; // ← cambia el ícono
     });
 
     overlay.addEventListener("click", () => {
       sidebar.classList.remove("open");
       overlay.classList.remove("active");
       hamburger.classList.remove("active");
+      hamburger.textContent = "☰"; // ← vuelve al ícono original
     });
   }
   
