@@ -100,9 +100,9 @@ label { font-weight: 600; margin-top: 1rem; display: block; }
 main {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: auto;    /* Mejor que hidden para tablas */
   flex: 1;
-  padding: 2rem 3rem;
+  padding: 1rem;       /* Reducir padding en general */
 }
 
 header {
