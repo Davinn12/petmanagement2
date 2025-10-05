@@ -2,53 +2,49 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mis Mascotas - PetManagement</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
-    <h2>🐕 Mis Mascotas</h2>
-    <a href="dashboard.html">Volver al Dashboard</a>
-  </header>
+  <aside class="sidebar">
+    <div>
+      <div class="logo">🐾 PetManagement</div>
+      <nav>
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="citas.html">📅 Agendar Servicio</a>
+        <a href="mascotas.html" class="active">🐶 Mis Mascotas</a>
+        <a href="planes.html">⭐ Planes</a>
+        <a href="admin.html">⚙️ Administrador</a>
+      </nav>
+    </div>
+    <div class="footer">© 2025 PetManagement</div>
+  </aside>
 
-  <div class="form-wide">
-    <h3>Registrar nueva mascota</h3>
-    <form>
-      <label>Nombre de la mascota</label>
-      <input type="text" required>
-
-      <label>Especie</label>
-      <select>
-        <option>Perro</option>
-        <option>Gato</option>
-        <option>Otro</option>
-      </select>
-
-      <label>Raza</label>
-      <input type="text">
-
-      <label>Edad</label>
-      <input type="number" min="0">
-
-      <label>Peso (kg)</label>
-      <input type="number" step="0.1" min="0">
-
-      <label>Historial médico</label>
-      <textarea rows="4"></textarea>
-
-      <label>Foto de la mascota</label>
-      <input type="file" accept="image/*">
-
-      <button type="submit">Guardar Mascota</button>
-      <button type="button" onclick="window.location.href='dashboard.html'">Cancelar</button>
+  <main>
+    <header><h1>Registro de Mascotas</h1></header>
+    <form class="card grid grid-2">
+      <div>
+        <label>Nombre</label>
+        <input type="text">
+        <label>Especie</label>
+        <select><option>Perro</option><option>Gato</option><option>Otro</option></select>
+        <label>Raza</label>
+        <input type="text">
+        <label>Edad</label>
+        <input type="number" min="0">
+      </div>
+      <div>
+        <label>Peso (kg)</label>
+        <input type="number" step="0.1">
+        <label>Historial Médico</label>
+        <textarea rows="4"></textarea>
+        <label>Foto</label>
+        <input type="file">
+      </div>
+      <div style="grid-column: 1 / span 2; text-align: right;">
+        <button class="btn">Guardar Mascota</button>
+      </div>
     </form>
-  </div>
-
-  <div class="list" style="max-width:600px;margin:20px auto;">
-    <h3>Mascotas registradas</h3>
-    <div class="list-item">Luna 🐕 – Golden Retriever</div>
-    <div class="list-item">Michi 🐈 – Siames</div>
-  </div>
+  </main>
 </body>
 </html>
