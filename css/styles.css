@@ -359,6 +359,68 @@ header {
     }
 }
 
+/* ======== RUTAS RESPONSIVE ======== */
+.map-layout {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.map-box {
+    flex: 1;
+    min-height: 400px;
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, #eef7ff, #ffffff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 300px;
+}
+
+.route-side {
+    width: 360px;
+    flex-shrink: 0;
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .map-layout {
+        flex-direction: column;
+    }
+
+    .route-side {
+        width: 100%;
+    }
+
+    .map-box {
+        width: 100%;
+        min-height: 350px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .map-box {
+        min-height: 300px;
+    }
+
+    .route-side {
+        width: 100%;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .map-box {
+        min-height: 250px;
+    }
+
+    .route-side .card {
+        padding: 1rem;
+    }
+}
+
 /* Prevención de desbordamiento global */
 * {
     box-sizing: border-box;
